@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <style>
+        .custom-background {
+            background-color: rgb(186, 209, 252);
+        }
+
+        .custom-card {
+            background-color: rgb(50, 50, 145); /* Slightly transparent dark blue */
+            border-radius: 0.5rem; /* Less rounded corners */
+        }
+
+    </style>
+</head>
+<body>
+<section class="vh-100 custom-background">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-7 col-xl-6">
+                <div class="card custom-card text-white">
+                    <div class="card-body p-5 text-center">
+                        <div class="mb-md-0 mt-md-4 pb-2">
+                            <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                            <form method="post" th:action="@{/loginUser}" th:object="${userForm}" class="form-signin">
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" th:field="*{username}" id="username" placeholder="name@example.com" required>
+                                    <label for="username" class="form-label text-dark">Email</label>
+                                </div>
+
+                                <div class="form-floating mb-4">
+                                    <input type="password" class="form-control" th:field="*{password}" id="password" placeholder="Password" required>
+                                    <label for="password" class="form-label text-dark">Password</label>
+                                </div>
+
+                                <div class="error-message mb-5" th:if="${param.error}">
+                                    <p class="text-danger">Wrong user credentials!</p>
+                                </div>
+
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                            </form>
+                        </div>
+
+                        <div>
+                            <p class="mb-2"><a href="/register" class="text-white-50 fw-bold">Register new account</a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
